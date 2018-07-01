@@ -10,7 +10,10 @@ import Foundation
 
 public class HubProxy: HubProxyProtocol {
 
+    public typealias HubSubscription = (String, [Any])->()
+
     public var state = [String: Any]()
+    public var hubSubscription: HubSubscription? = nil
 
     private weak var connection: HubConnectionProtocol?
     private let hubName: String
@@ -37,6 +40,8 @@ public class HubProxy: HubProxyProtocol {
     public func invokeEvent(eventName: String, withArgs args: [Any]) {
         if let subscription = self.subscriptions[eventName] {
             subscription(args)
+        } else {
+            hubSubscription?(eventName, args)
         }
     }
 
