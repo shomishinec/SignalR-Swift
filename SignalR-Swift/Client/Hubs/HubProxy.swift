@@ -27,7 +27,7 @@ public class HubProxy: HubProxyProtocol {
     }
 
     // MARK: - Subscribe
-
+    @discardableResult
     public func on(eventName: String, handler: @escaping Subscription) -> Subscription? {
         guard !eventName.isEmpty else {
             NSException.raise(.invalidArgumentException, format: NSLocalizedString("Argument eventName is null", comment: "null event name exception"), arguments: getVaList(["nil"]))
