@@ -7,7 +7,7 @@ target 'SignalRSwift' do
   
   # Pods for SignalR-Swift
   pod 'Alamofire', '~> 4.2'
-  pod 'Starscream', '~> 3.0'
+  pod 'Starscream', git: 'https://github.com/daltoniam/Starscream', branch: 'xcode-10'
 
   target 'SignalR-SwiftTests' do
     inherit! :search_paths
@@ -23,7 +23,7 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     if target.name == 'Mockit'
       target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '3.2'
+        config.build_settings['SWIFT_VERSION'] = '4.2'
       end
     end
   end
